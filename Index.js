@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Products</title>
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      .products-wrapper {
+        max-width: 1024px;
+        width: 100%;
+        margin: 40px auto;
+      }
+
+      .search-value {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+      }
+
+      .products {
+        margin-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        gap: 20px;
+      }
+
+      .products-list {
+        max-width: 800px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .cart-summary {
+        width: 190px;
+        min-height: 100px;
+        padding: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .card {
+        width: calc(50% - 5px);
+        min-height: 150px;
+        padding: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        display: flex;
+        column-gap: 20px;
+        align-items: center;
+      }
+
+      .thumbnail {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+      }
+
+      .product-info {
+        flex: 1;
+      }
+
+      .product-info h3 {
+        margin-top: 0;
+      }
+
+      .product-info p {
+        font-size: 14px;
+      }
+
+      .decrease,
+      .increase {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="products-wrapper">
+      <input
+        type="text"
+        placeholder="Search product..."
+        class="search-value"
+      />
+
+      <div class="products">
+        <div class="products-list"></div>
+
+        <div class="cart-summary">
+          <div class="total-price">Total Price: 0 GEL</div>
+        </div>
+      </div>
+    </section>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
