@@ -77,11 +77,6 @@
 
       .product-info h3 {
         margin-top: 0;
-        margin-bottom: 10px;
-      }
-
-      .product-info h4 {
-        margin: 10px 0;
       }
 
       .product-info p {
@@ -91,17 +86,36 @@
       .decrease,
       .increase {
         cursor: pointer;
-        width: 28px;
-        height: 28px;
-      }
-
-      .quantity {
-        margin: 0 8px;
       }
     </style>
   </head>
 
   <body>
+    <section class="products-wrapper">
+
+      <input
+        type="text"
+        placeholder="Search product..."
+        class="search-value"
+      />
+
+      <div class="products">
+
+        <div class="products-list"></div>
+
+        <div class="cart-summary">
+          <div class="total-price">
+            Total Price: 0 GEL
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <script src="./index.js"></script>
+  </body>
+</html>  <body>
     <section class="products-wrapper">
 
       <input
