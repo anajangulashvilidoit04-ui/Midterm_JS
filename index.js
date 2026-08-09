@@ -1,19 +1,16 @@
 let products = [];
 
-// 1. მონაცემების წამოღება API-დან
+// 1. პროდუქტების წამოღება API-დან
 const fetchProducts = async () => {
   try {
     const response = await fetch("https://dummyjson.com/products");
     const data = await response.json();
 
-    // მთავარი გასწორება: API-ს პროდუქტებს არ აქვთ quantity.
-    // აუცილებელია თითოეულს თავიდანვე მივანიჭოთ quantity: 0, რომ + და - ღილაკებმა იმუშაოს!
-    products = data.products.map((product) => {
-      return {
-        ...product,
-        quantity: 0,
-      };
-    });
+    // თითოეულ პროდუქტს ვამატებთ quantity: 0 ველს
+    products = data.products.map((product) => ({
+      ...product,
+      quantity: 0,
+    }));
 
     displayProducts(products);
     displayCartSummary();
@@ -24,14 +21,14 @@ const fetchProducts = async () => {
 
 fetchProducts();
 
-// 2. ლაივ ძებნა სათაურით
+// 2. ლაივ ძებნა სათაურის მიხედვით
 const searchInput = document.querySelector(".search-value");
 
 searchInput.addEventListener("input", (event) => {
-  const value = event.target.value.toLowerCase();
+  const value = event.target.value.toLowerCase().trim();
 
   const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(value),
+    product.title.toLowerCase().includes(value)
   );
 
   displayProducts(filteredProducts);
@@ -42,27 +39,38 @@ const displayProducts = (productsToDisplay) => {
   const productsList = document.querySelector(".products-list");
   productsList.innerHTML = "";
 
+  if (productsToDisplay.length === 0) {
+    productsList.innerHTML = "<p>პროდუქტი ვერ მოიძებნა</p>";
+    return;
+  }
+
   productsToDisplay.forEach((product) => {
-    const { title, price, description, brand, stock, images, quantity } = product;
+    const { title, price, description, brand, stock, images, thumbnail, quantity } = product;
 
     const productCard = document.createElement("div");
     productCard.classList.add("card");
 
-    const productImage = images[0];
+    // უსაფრთხო სურათის ამოღება (თუ images[0] არ არსებობს, იყენებს thumbnail-ს)
+    const productImage = (images && images.length > 0) ? images[0] : (thumbnail || "");
+
+    const isMinusDisabled = quantity === 0 ? "disabled" : "";
+    const isPlusDisabled = quantity >= stock ? "disabled" : "";
 
     productCard.innerHTML = `
-      <img src="${productImage}" class="thumbnail" />
+      <img src="${productImage}" alt="${title}" class="thumbnail" />
 
       <div class="product-info">
         <h3>${title}</h3>
         <h4>${Math.round(price).toLocaleString()} GEL</h4>
         <p>${description}</p>
-        <p>Brand: ${brand || "N/A"}</p>
-        <p>Stock: ${stock}</p>
+        <p><strong>Brand:</strong> ${brand || "N/A"}</p>
+        <p><strong>Stock:</strong> ${stock}</p>
 
-        <button class="decrease">-</button>
-        <span class="quantity">Quantity: ${quantity}</span>
-        <button class="increase">+</button>
+        <div class="controls">
+          <button class="decrease" ${isMinusDisabled}>-</button>
+          <span class="quantity">Quantity: ${quantity}</span>
+          <button class="increase" ${isPlusDisabled}>+</button>
+        </div>
       </div>
     `;
 
@@ -70,27 +78,39 @@ const displayProducts = (productsToDisplay) => {
     const increaseBtn = productCard.querySelector(".increase");
     const currentQuantity = productCard.querySelector(".quantity");
 
-    // დაკლება
+    // დაკლების ლოგიკა
     decreaseBtn.addEventListener("click", () => {
       if (product.quantity > 0) {
         product.quantity--;
         currentQuantity.textContent = `Quantity: ${product.quantity}`;
-        displayCartSummary(); // იძახებს Total-ის ახლიდან დათვლას
+        displayCartSummary();
+
+        increaseBtn.disabled = false;
+        if (product.quantity === 0) {
+          decreaseBtn.disabled = true;
+        }
       }
     });
 
-    // მომატება
+    // მომატების ლოგიკა
     increaseBtn.addEventListener("click", () => {
-      product.quantity++;
-      currentQuantity.textContent = `Quantity: ${product.quantity}`;
-      displayCartSummary(); // იძახებს Total-ის ახლიდან დათვლას
+      if (product.quantity < product.stock) {
+        product.quantity++;
+        currentQuantity.textContent = `Quantity: ${product.quantity}`;
+        displayCartSummary();
+
+        decreaseBtn.disabled = false;
+        if (product.quantity === product.stock) {
+          increaseBtn.disabled = true;
+        }
+      }
     });
 
     productsList.appendChild(productCard);
   });
 };
 
-// 4. Cart Summary-ში ჯამური ფასის (Total Price) დათვლა
+// 4. კალათის ჯამური ფასის დათვლა
 const displayCartSummary = () => {
   const totalPrice = document.querySelector(".total-price");
 
@@ -100,7 +120,6 @@ const displayCartSummary = () => {
 
   totalPrice.textContent = `Total Price: ${Math.round(priceSum).toLocaleString()} GEL`;
 };
-
         // ლოგიკა ღილაკებისთვის: როცა ვუმატებთ, მინუს ღილაკი აუცილებლად აქტიურდება
         decreaseBtn.disabled = false;
 
