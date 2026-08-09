@@ -1,15 +1,14 @@
 <!doctype html>
-<html lang="ka">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Products</title>
+
     <style>
       body {
         font-family: Arial, Helvetica, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #f9f9f9;
       }
 
       * {
@@ -19,7 +18,7 @@
       .products-wrapper {
         max-width: 1024px;
         width: 100%;
-        margin: 20px auto;
+        margin: 40px auto;
       }
 
       .search-value {
@@ -28,14 +27,13 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         outline: none;
-        font-size: 16px;
       }
 
       .products {
         margin-top: 24px;
         display: flex;
         justify-content: space-between;
-        align-items: start;
+        align-items: flex-start;
         gap: 20px;
       }
 
@@ -45,37 +43,32 @@
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 10px;
       }
 
       .cart-summary {
-        width: 200px;
+        width: 190px;
         min-height: 100px;
         padding: 16px;
         border: 1px solid #ccc;
-        border-radius: 6px;
-        background-color: #fff;
-        position: sticky;
-        top: 20px;
+        border-radius: 4px;
       }
 
       .card {
-        width: calc(50% - 6px);
-        min-height: 160px;
+        width: calc(50% - 5px);
+        min-height: 200px;
         padding: 16px;
-        border: 1px solid #e0e0e0;
-        border-radius: 6px;
-        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
         display: flex;
-        column-gap: 16px;
+        column-gap: 20px;
         align-items: center;
       }
 
       .thumbnail {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
         object-fit: cover;
-        border-radius: 4px;
       }
 
       .product-info {
@@ -83,25 +76,55 @@
       }
 
       .product-info h3 {
-        margin: 0 0 8px 0;
-        font-size: 16px;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      .product-info h4 {
+        margin: 10px 0;
       }
 
       .product-info p {
-        margin: 4px 0;
-        font-size: 13px;
-        color: #555;
-      }
-
-      .controls {
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        font-size: 14px;
       }
 
       .decrease,
       .increase {
+        cursor: pointer;
+        width: 28px;
+        height: 28px;
+      }
+
+      .quantity {
+        margin: 0 8px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="products-wrapper">
+
+      <input
+        type="text"
+        placeholder="Search product..."
+        class="search-value"
+      />
+
+      <div class="products">
+
+        <div class="products-list"></div>
+
+        <div class="cart-summary">
+          <div class="total-price">Total Price: 0 GEL</div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <script src="./index.js"></script>
+  </body>
+</html>      .increase {
         cursor: pointer;
         padding: 4px 10px;
         font-size: 14px;
