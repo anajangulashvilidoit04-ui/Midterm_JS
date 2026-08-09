@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ka">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +7,9 @@
     <style>
       body {
         font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f9f9f9;
       }
 
       * {
@@ -16,7 +19,7 @@
       .products-wrapper {
         max-width: 1024px;
         width: 100%;
-        margin: 40px auto;
+        margin: 20px auto;
       }
 
       .search-value {
@@ -25,6 +28,7 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         outline: none;
+        font-size: 16px;
       }
 
       .products {
@@ -41,27 +45,29 @@
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 12px;
       }
 
       .cart-summary {
-        width: 190px;
+        width: 200px;
         min-height: 100px;
         padding: 16px;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: 6px;
+        background-color: #fff;
         position: sticky;
         top: 20px;
       }
 
       .card {
-        width: calc(50% - 5px);
-        min-height: 150px;
+        width: calc(50% - 6px);
+        min-height: 160px;
         padding: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        background-color: #fff;
         display: flex;
-        column-gap: 20px;
+        column-gap: 16px;
         align-items: center;
       }
 
@@ -69,6 +75,7 @@
         width: 100px;
         height: 100px;
         object-fit: cover;
+        border-radius: 4px;
       }
 
       .product-info {
@@ -76,17 +83,38 @@
       }
 
       .product-info h3 {
-        margin-top: 0;
+        margin: 0 0 8px 0;
+        font-size: 16px;
+      }
+
+      .product-info p {
+        margin: 4px 0;
+        font-size: 13px;
+        color: #555;
+      }
+
+      .controls {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
 
       .decrease,
       .increase {
         cursor: pointer;
-        padding: 2px 8px;
+        padding: 4px 10px;
+        font-size: 14px;
+      }
+
+      button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
       }
 
       .total-price {
         font-weight: bold;
+        font-size: 16px;
       }
     </style>
   </head>
@@ -102,15 +130,6 @@
       <div class="products">
         <div class="products-list"></div>
 
-        <div class="cart-summary">
-          <div class="total-price">Total Price: 0 GEL</div>
-        </div>
-      </div>
-    </section>
-
-    <script src="./index.js"></script>
-  </body>
-</html>
         <div class="cart-summary">
           <div class="total-price">Total Price: 0 GEL</div>
         </div>
