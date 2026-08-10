@@ -170,47 +170,4 @@ body {
     width: 100px;
     height: 100px;
   }
-}.increase:hover {
-  background-color: #dddddd;
-}
-
-.quantity {
-  margin: 0 8px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.cart-summary {
-  width: 200px;
-  min-height: 100px;
-  padding: 20px;
-  background-color: white;
-  border: 1px solid #e5e5e5;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.total-price {
-  font-weight: bold;
-  font-size: 17px;
-}
-
-@media (max-width: 800px) {
-  .products {
-    flex-direction: column;
-  }
-
-  .products-list {
-    max-width: 100%;
-  }
-
-  .cart-summary {
-    width: 100%;
-  }
-}
-
-@media (max-width: 600px) {
-  .card {
-    width: 100%;
-  }
 }
